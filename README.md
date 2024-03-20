@@ -1,32 +1,31 @@
 # Minecraft Server Backup Script - 🛡️ Guardian
 
-Este script Python, denominado Guardian, foi desenvolvido para automatizar a execução de um servidor Minecraft e realizar backups diários do mundo do servidor às 5 horas da manhã.
+This Python script, named Guardian, has been developed to automate the execution of a Minecraft server and perform daily backups of the server world at 5 o'clock in the morning.
 
-## Requisitos
+## Requirements
 
 - Python 3.x
-- Biblioteca `halo` (pode ser instalada via `pip install halo`)
+- Library `halo` (can be installed via `pip install halo`)
 
-### Execução
+### Execution
 
-1. Certifique-se de ter Python 3.x instalado em seu sistema.
-2. Instale a biblioteca `halo` usando o seguinte comando:
+1. Make sure you have Python 3.x installed on your system.
+2. Install the `halo` library using the following command:
 
 ```bash
 pip install halo
 ```
-
-3. Coloque o arquivo `paper.jar` no mesmo diretório do script Guardian.
-4. Execute o script Guardian com o seguinte comando:
+3. Place the `paper.jar` file in the same directory as the Guardian script.
+4. Run the Guardian script using the following command:
 
 ```bash
 python Guardian.py
 ```
 
-5. O servidor Minecraft será iniciado automaticamente e mantido em execução. O backup será realizado todos os dias às 5 horas da manhã.
-6. O backup será armazenado no diretório atual com o formato `mundo_backup [data-hora].zip`.
+5. The Minecraft server will be automatically started and kept running. The backup will be performed every day at 5 o'clock in the morning.
+6. The backup will be stored in the current directory in the format `mundo_backup [date-time].zip`.
 
 ## Preview
 ![preview](https://i.imgur.com/o1DemYT.png)
 
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
