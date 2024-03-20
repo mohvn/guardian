@@ -1,4 +1,11 @@
-# Minecraft Server Backup Script - 🛡️ Guardian
+<p align="center">
+    <a href="https://github.com/mdxv/guardian/">
+        <img src="https://i.imgur.com/pMfDV3o.png"></a>
+    <br><br>
+    <a href="https://python.org/"><img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white"></a>
+    <a href="https://minecraft.net/"><img src="https://img.shields.io/badge/Minecraft-3C8527.svg?style=flat&logo=Minecraft&logoColor=white"></a>
+  
+</p>
 
 This Python script, named Guardian, has been developed to automate the execution of my Minecraft server and perform daily backups of the server world at 5 o'clock in the morning.
 
