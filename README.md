@@ -26,4 +26,7 @@ python Guardian.py
 5. O servidor Minecraft será iniciado automaticamente e mantido em execução. O backup será realizado todos os dias às 5 horas da manhã.
 6. O backup será armazenado no diretório atual com o formato `mundo_backup [data-hora].zip`.
 
+## Preview
+![preview](https://i.imgur.com/o1DemYT.png)
+
 Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
