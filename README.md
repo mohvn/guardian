@@ -1,6 +1,6 @@
 # Minecraft Server Backup Script - 🛡️ Guardian
 
-This Python script, named Guardian, has been developed to automate the execution of a Minecraft server and perform daily backups of the server world at 5 o'clock in the morning.
+This Python script, named Guardian, has been developed to automate the execution my Minecraft server and perform daily backups of the server world at 5 o'clock in the morning.
 
 ## Requirements
 
