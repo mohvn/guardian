@@ -26,6 +26,7 @@ def run_server():
   tempo_maximo = diferenca_tempo.total_seconds()
 
   print(f"\n\n🚀 Server started at {date_now}\n\n")
+  global processo
   processo = subprocess.Popen(comando, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
   inicio = time.time()
@@ -41,11 +42,11 @@ def run_server():
         processo.stdin.flush()
         break
   except KeyboardInterrupt:
-      print("❌ (CTRL + C detected!) Halting server... (Sending 'stop' command to halt the server...)")
+      print("❌ (CTRL + C detected!) Halting server... (Sending 'stop' command to stop the server...)")
       processo.stdin.write("stop\n")
       processo.stdin.flush()
+      time.sleep(10)
 
-  time.sleep(10)
   processo.terminate()
 
 
@@ -92,12 +93,12 @@ def backup():
 
     print("✔️ Backup completed!")
   except KeyboardInterrupt:
-    print("\n\n❌ (CTRL + C detected!) Halting backup...")
+    print("\n\n❌ (CTRL + C detected!) Stopping backup...")
+    processo.terminate()
     os._exit(130)
-    
-
 
 if __name__ == '__main__':
   while True:
     run_server()
     backup()
+
