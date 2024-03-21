@@ -12,6 +12,9 @@ def run_server():
   # Horário da execução do comando
   now = datetime.now()
 
+  # Pegar a data atual do backup
+  date_now = now.strftime("%H:%M em %d/%m/%y")
+
   comando = ["java", "-Xmx4G", "-jar", "paper-1.20.2-318.jar"]
 
   # Definir horário de Backup
@@ -22,7 +25,7 @@ def run_server():
   diferenca_tempo = hora_finalizacao - now
   tempo_maximo = diferenca_tempo.total_seconds()
 
-  print("\n\n🚀 Servidor iniciado\n\n")
+  print(f"\n\n🚀 Server started at {date_now}\n\n")
   processo = subprocess.Popen(comando, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
   inicio = time.time()
@@ -33,16 +36,17 @@ def run_server():
       tempo_restante = tempo_maximo - (time.time() - inicio)
 
       if tempo_restante <= 0:
-        print("\n🗃️ Hora de fazer backup. Enviando comando 'stop' para parar o servidor...")
+        print("\n❌ Server stopped! (Sending 'stop' command to halt the server...)")
         processo.stdin.write("stop\n")
         processo.stdin.flush()
         break
-          
   except KeyboardInterrupt:
-      print("Interrompendo...")
-      processo.terminate()
+      print("❌ (CTRL + C detected!) Halting server... (Sending 'stop' command to halt the server...)")
+      processo.stdin.write("stop\n")
+      processo.stdin.flush()
 
   time.sleep(10)
+  processo.terminate()
 
 
 
@@ -51,40 +55,46 @@ def backup():
   Realiza a compressão do arquivo de mundo do Minecraft para backup.
   """
 
-  diretorio_atual = os.getcwd()
+  try:
+    diretorio_atual = os.getcwd()
+    print(f"🗃️ Starting backup at {diretorio_atual}")
 
-  prefixo = "mundo_backup"
+    prefixo = "mundo_backup"
 
-  arquivos = os.listdir(diretorio_atual)
-  arquivos_com_prefixo = [arquivo for arquivo in arquivos if arquivo.startswith(prefixo)]
+    arquivos = os.listdir(diretorio_atual)
+    arquivos_com_prefixo = [arquivo for arquivo in arquivos if arquivo.startswith(prefixo)]
 
-  if arquivos_com_prefixo:
-    print("📁 Detectado um backup anterior!")
+    if arquivos_com_prefixo:
+      print("📁 Previous backup detected!")
 
-    for arquivo in arquivos_com_prefixo:
-      print("❌ Excluindo arquivo anterior de backup...")
-      os.remove(os.path.join(diretorio_atual, arquivo))
-  else:
-    print("✔️ Não foi identificado backup anterior")
+      for arquivo in arquivos_com_prefixo:
+        print("❌ Deleting previous backup file...")
+        os.remove(os.path.join(diretorio_atual, arquivo))
+    else:
+      print("✔️ No previous backup detected.")
 
 
-  # Horário da execução do comando
-  now = datetime.now()
+    # Time of command execution
+    now = datetime.now()
 
-  # Pegar a data atual do backup
-  backup_date = now.strftime("%d.%m-%H-%M")
+    # Getting current date of backup
+    backup_date = now.strftime("%d.%m-%H-%M")
 
-  print(f"💾 Backup às {now.strftime("%H:%M")} do dia {now.strftime("%d/%m/%y")}")
-  spinner = Halo(text=f"Realizando backup...", spinner='dots')
-  spinner.start()
+    print(f"💾 Backup at {now.strftime("%H:%M")} on {now.strftime("%d/%m/%y")}")
+    spinner = Halo(text=f"Performing backup...", spinner='dots')
+    spinner.start()
 
-  # Comprimindo o arquivo do mundo
-  nome_do_arquivo_de_backup = f"mundo_backup {backup_date}"
-  shutil.make_archive(nome_do_arquivo_de_backup, 'zip', "mundo")
+    # Compressing the world file
+    nome_do_arquivo_de_backup = f"mundo_backup {backup_date}"
+    shutil.make_archive(nome_do_arquivo_de_backup, 'zip', "mundo")
 
-  spinner.stop()
+    spinner.stop()
 
-  print("✔️ Backup finalizado!")
+    print("✔️ Backup completed!")
+  except KeyboardInterrupt:
+    print("\n\n❌ (CTRL + C detected!) Halting backup...")
+    os._exit(130)
+    
 
 
 if __name__ == '__main__':
