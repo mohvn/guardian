@@ -5,6 +5,17 @@ import subprocess
 from halo import Halo
 import os
 
+class bcolors:
+  HEADER = '\033[95m'
+  OKBLUE = '\033[94m'
+  OKCYAN = '\033[96m'
+  OKGREEN = '\033[92m'
+  WARNING = '\033[93m'
+  FAIL = '\033[91m'
+  ENDC = '\033[0m'
+  BOLD = '\033[1m'
+  UNDERLINE = '\033[4m'
+
 def run_server():
   """
   Inicia e mantém o servidor Minecraft em execução até a hora do backup.
@@ -13,7 +24,7 @@ def run_server():
   now = datetime.now()
 
   # Pegar a data atual do backup
-  date_now = now.strftime("%H:%M em %d/%m/%y")
+  date_now = now.strftime(f"{bcolors.OKGREEN}%H:%M{bcolors.ENDC} at {bcolors.OKGREEN}%d/%m/%y")
 
   comando = ["java", "-Xmx4G", "-jar", "paper-1.20.2-318.jar"]
 
@@ -25,7 +36,15 @@ def run_server():
   diferenca_tempo = hora_finalizacao - now
   tempo_maximo = diferenca_tempo.total_seconds()
 
-  print(f"\n\n🚀 Server started at {date_now}\n\n")
+  print(f"\n\n✔️ Server started at {date_now}!")
+  print("""
+ ██████╗ ██╗   ██╗ █████╗ ██████╗ ██████╗ ██╗ █████╗ ███╗   ██╗
+██╔════╝ ██║   ██║██╔══██╗██╔══██╗██╔══██╗██║██╔══██╗████╗  ██║
+██║  ███╗██║   ██║███████║██████╔╝██║  ██║██║███████║██╔██╗ ██║
+██║   ██║██║   ██║██╔══██║██╔══██╗██║  ██║██║██╔══██║██║╚██╗██║
+╚██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝██║██║  ██║██║ ╚████║
+ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+""")
   global processo
   processo = subprocess.Popen(comando, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
@@ -58,7 +77,7 @@ def backup():
 
   try:
     diretorio_atual = os.getcwd()
-    print(f"🗃️ Starting backup at {diretorio_atual}")
+    print(f"🗃️ Starting backup at {bcolors.OKGREEN}{diretorio_atual}{bcolors.ENDC}")
 
     prefixo = "mundo_backup"
 
@@ -96,9 +115,10 @@ def backup():
     print("\n\n❌ (CTRL + C detected!) Stopping backup...")
     processo.terminate()
     os._exit(130)
+    
+
 
 if __name__ == '__main__':
   while True:
     run_server()
     backup()
-
