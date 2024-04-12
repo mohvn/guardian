@@ -33,6 +33,6 @@ python Guardian.py
 6. The backup will be stored in the current directory in the format `mundo_backup [date-time].zip`.
 
 ## Preview
-![preview](https://i.imgur.com/o1DemYT.png)
+![preview](https://i.imgur.com/fgCX3Ye.png)
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
