@@ -1,4 +1,4 @@
-import shutil
+import zipfile
 from datetime import datetime, timedelta
 import time
 import subprocess
@@ -68,7 +68,14 @@ def run_server():
 
   processo.terminate()
 
-
+def zip_folders(folder_paths, zip_filename):
+  with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    for folder_path in folder_paths:
+      for root, _, files in os.walk(folder_path):
+        for file in files:
+          file_path = os.path.join(root, file)
+          arcname = os.path.relpath(file_path, os.path.dirname(folder_path))
+          zipf.write(file_path, arcname=arcname)
 
 def backup():
   """
@@ -105,8 +112,15 @@ def backup():
     spinner.start()
 
     # Compressing the world file
-    nome_do_arquivo_de_backup = f"mundo_backup {backup_date}"
-    shutil.make_archive(nome_do_arquivo_de_backup, 'zip', "mundo")
+    mundo_folders = [
+      f'{diretorio_atual}/mundo',
+      f'{diretorio_atual}/mundo_nether',
+      f'{diretorio_atual}/mundo_the_end',
+    ]
+
+    nome_do_arquivo_de_backup = f"mundo_backup {backup_date}.zip"
+    zip_folders(mundo_folders, nome_do_arquivo_de_backup)
+    # shutil.make_archive(nome_do_arquivo_de_backup, 'zip', "mundo")
 
     spinner.stop()
 
@@ -115,7 +129,6 @@ def backup():
     print("\n\n❌ (CTRL + C detected!) Stopping backup...")
     processo.terminate()
     os._exit(130)
-    
 
 
 if __name__ == '__main__':
