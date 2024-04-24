@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/mdxv/guardian/">
-        <img src="https://i.imgur.com/pMfDV3o.png"></a>
+        <img src="https://i.imgur.com/stSxGRB.png"></a>
     <br><br>
     <a href="https://python.org/"><img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white"></a>
     <a href="https://minecraft.net/"><img src="https://img.shields.io/badge/Minecraft-3C8527.svg?style=flat&logo=Minecraft&logoColor=white"></a>
